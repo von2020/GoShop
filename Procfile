@@ -1,0 +1,1 @@
+web: gunicorn Goshop2.wsgi
