@@ -1,0 +1,641 @@
+{% load static %}
+{% load hitcount_tags %}
+{% load social_widgets %}
+
+<!-- {% load blog_tags %} -->
+<!doctype html>
+<html class="no-js" lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>GOShop</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="manifest" href="site.webmanifest">
+		<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+		<!-- CSS here -->
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/modalbox.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.min.css' %}" />
+            <link rel="stylesheet" href="{% static 'assets/css/ace.min.css' %}" class="ace-main-stylesheet" id="main-ace-style" />
+            <link rel="stylesheet" href="{% static 'assets/css/ace-rtl.min.css' %}" />
+   </head>
+
+   <body style="background-color: white;">
+       
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img style="height: 3em; width: 3em;" src="{% static 'assets/img/goshop/goshop4.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+
+    <header>
+        <!-- Header Start -->
+       <div class="header-area">
+            <div class="main-header ">
+                <div class="header-top top-bg d-none d-lg-block">
+                   <div class="container-fluid">
+                       <div class="col-xl-12">
+                            <div class="row d-flex justify-content-between align-items-center">
+                                <div class="header-info-left d-flex">
+                                    <div class="flag">
+                                        <img style="height: 2em; width: 2em;" src="{% static 'assets/img/icon/nigeria-flag-xs.png' %}" alt="">
+                                    </div>
+                                    <div class="select-this">
+                                        <form action="#">
+                                            <div class="select-itms">
+                                                <select name="select" id="select1">
+                                                    <option value="">NGN</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <ul class="contact-now">     
+                                        <li></li>
+                                    </ul>
+                                </div>
+                                <div class="header-info-right">
+                                   <!-- <ul>                                          
+                                       <li><a href="login.html">My Account </a></li>
+                                       <li><a href="product_list.html">Wish List  </a></li>
+                                       <li><a href="cart.html">Shopping</a></li>
+                                       <li><a href="cart.html">Cart</a></li>
+                                       <li><a href="checkout.html">Checkout</a></li>
+                                   </ul> -->
+                                </div>
+                            </div>
+                       </div>
+                   </div>
+                </div>
+               <div class="header-bottom  header-sticky">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Logo -->
+                            <!-- <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
+                                <div class="logo">
+                                  <a href="index.html"><img src="{% static 'assets/img/logo/logo.png' %}" alt=""></a>
+                                </div>
+                            </div> -->
+                            <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
+                                <!-- Main-menu -->
+                                <div class="main-menu f-right d-none d-lg-block">
+                                    <nav>                                                
+                                        <ul id="navigation">
+                                            <li>{% social_widget_render "twitter/follow_button.html" username="GoShop47322089" %}</li>                                                                                                                                     
+                                            <li><a href="/">Home</a></li>
+                                            <li><a href="blog.html">Product Categories</a>
+                                                <ul class="submenu">
+                                                    {% for cat in cats %}
+                                                    <li><a href="/dashboard/product_category/{{cat.id}}">{{ cat.name }}</a></li>
+                                                    {% endfor %}
+                                                    </ul>
+                                            </li>
+                                            <li><a href="/blog/all-posts">Blog</a></li>
+                                            <li><a href="/contact/contact-us">Contact</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div> 
+                            <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
+                                <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
+                                    <li class="d-none d-xl-block">
+                                        <div class="form-box f-right ">
+                                            <input type="text" name="Search" placeholder="Search products">
+                                            <div class="search-icon">
+                                                <i class="fas fa-search special-tag"></i>
+                                            </div>
+                                        </div>
+                                     </li>
+                                     <li class=" d-none d-xl-block">
+                                        <div >
+                                            <h4 class="far fa-heart"><strong>{{ user_count }} Followers</strong></h4>
+                                            <i ></i>
+                                        </div>
+                                    </li>
+                                   <li class="d-none d-lg-block"> 
+                                    
+                                </li>
+                                </ul>
+                            </div>
+                            <!-- Mobile Menu -->
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+       </div>
+        <!-- Header End -->
+    </header>
+    <div class="slider-area ">
+        <!-- Mobile Menu -->
+    <div class="slider-active">
+        <div class="single-slider slider-height" data-background="{% static 'assets/img/goshop/goshopheader.png' %}">
+            <div class="container">
+                <div class="row d-flex align-items-center justify-content-between">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                        <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                            <img src="{% static 'assets/img/goshop/hero_man.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                        <div class="hero__caption">
+                            <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="content">
+        <div class="main-container ace-save-state" id="main-container">
+            <script type="text/javascript">
+                try{ace.settings.loadState('main-container')}catch(e){}
+            </script>
+    
+            <div id="sidebar" style="background-color:rgb(27, 137, 216)	;" class="sidenav responsive ace-save-state">
+                <script type="text/javascript">
+                    try{ace.settings.loadState('sidenav')}catch(e){}
+                </script>
+                <aside class="single_sidebar_widget instagram_feeds">
+                <div>
+                    <p>
+                        {% social_widget_render "facebook/likebox.html" locale="en_US" href="https://web.facebook.com/GOShop-106197331098319" show_faces=True stream=True noscript=True %}
+                    </p>
+                </div>
+                        
+                <div>
+                    <p><strong>Follow us on instagram</strong>
+                        {% social_widget_render "instagram/badge.html" size=32 username="goshop595" %}
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        {% social_widget_render "pinterest/profile_widget.html" href="http://www.pinterest.com/pinterest/" %}
+                    </p>
+                </div>
+            </aside>
+                
+            <aside class="single_sidebar_widget post_category_widget">
+                <div class="container"><br><br>
+                <h4 style="color: turquoise;" class="widget_title">Category</h4>
+                <ul class="list cat-list">
+                    {% for cat in cats %}
+                    <li>
+                        <a href="/dashboard/product_category/{{cat.id}}" class="d-flex">
+                            <p>{{ cat.name }}</p>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            </aside>
+            <aside class="single_sidebar_widget popular_post_widget">
+                  
+            </aside>
+        </div>
+        
+        <div class="content">
+        {% block body %}
+    
+        {% endblock %}
+        </div>
+    </div>
+</div>
+   <footer>
+    <div class="best-product-area lf-padding" >
+        <div class="product-wrapper bg-height" style="background-image: url('assets/img/categori/card.png')">
+             <div class="container position-relative">
+                 <div class="row justify-content-between align-items-end">
+                     <div class="product-man position-absolute  d-none d-lg-block">
+                         <img src="{% static 'assets/img/goshop/generator2.jpg' %}" alt="">
+                     </div>
+                     <div class="col-xl-2 col-lg-2 col-md-2 d-none d-lg-block">
+                         <div class="vertical-text">
+                             <span>Manz</span>
+                         </div>
+                     </div>
+                     <div class="col-xl-8 col-lg-8">
+                         <div class="best-product-caption">
+                             <h2>Find The Best Product<br> from Our Shop</h2>
+                             <a href="#" class="black-btn">Order Now</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </div>
+        <!-- Shape -->
+        <div class="shape bounce-animate d-none d-md-block">
+            <img src="{% static 'assets/img/goshop/cooker2.jpg' %}" alt="">
+        </div>
+     </div>
+    
+    
+    <div class="gallery-wrapper lf-padding">
+        <div class="gallery-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="gallery-items">
+                        <img src="{% static 'assets/img/goshop/infinixtv1.jpg' %}" alt="">
+                    </div> 
+                    <div class="gallery-items">
+                        <img src="{% static 'assets/img/goshop/tv3.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'assets/img/goshop/tv3.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'assets/img/goshop/infinixtv1.jpg' %}" alt="">
+                    </div>
+                    <div class="gallery-items">
+                        <img src="{% static 'assets/img/goshop/tv3.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+       
+               <!-- Footer bottom -->
+               <div class="row">
+                <div class="col-xl-7 col-lg-7 col-md-7">
+                    <div class="footer-copy-right">
+                        <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> GoShop 
+  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>                   </div>
+                </div>
+                 <div class="col-xl-5 col-lg-5 col-md-5">
+                    <div class="footer-copy-right f-right">
+                        <!-- social -->
+                        <div class="footer-social">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-behance"></i></a>
+                            <a href="#"><i class="fas fa-globe"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
+       </div>
+       <!-- Footer End-->
+
+   </footer>
+   
+	<!-- JS here -->
+        <script src="{% static 'hitcount/jquery.postcsrf.js' %}"></script>
+		<!-- All JS Custom Plugins Link Here here -->
+        <script src="{% static './assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+		<!-- Jquery, Popper, Bootstrap -->
+		<script src="{% static './assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static './assets/js/popper.min.js' %}"></script>
+        <script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+	    <!-- Jquery Mobile Menu -->
+        <script src="{% static './assets/js/jquery.slicknav.min.js' %}"></script>
+
+		<!-- Jquery Slick , Owl-Carousel Plugins -->
+        <script src="{% static './assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static './assets/js/slick.min.js' %}"></script>
+
+		<!-- One Page, Animated-HeadLin -->
+        <script src="{% static './assets/js/wow.min.js' %}"></script>
+		<script src="{% static './assets/js/animated.headline.js' %}"></script>
+        <script src="{% static './assets/js/jquery.magnific-popup.js' %}"></script>
+
+		<!-- Scrollup, nice-select, sticky -->
+        <script src="{% static './assets/js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static './assets/js/jquery.nice-select.min.js' %}"></script>
+		<script src="{% static './assets/js/jquery.sticky.js' %}"></script>
+        
+        <!-- contact js -->
+        <script src="{% static './assets/js/contact.js' %}"></script>
+        <script src="{% static './assets/js/jquery.form.js' %}"></script>
+        <script src="{% static './assets/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static './assets/js/mail-script.js' %}"></script>
+        <script src="{% static './assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        
+		<!-- Jquery Plugins, main Jquery -->	
+        <script src="{% static './assets/js/plugins.js' %}"></script>
+        <script src="{% static './assets/js/main.js' %}"></script>
+
+        <!-- Jquery alert boxes -->
+        <script src="{% static './assets/js/jquery-3.5.1.js' %}"></script>
+        <script src="{% static './assets/js/rango-jquery.js' %}"></script>
+        <script src="{% static './assets/js/btnclick.js' %}"></script>
+
+        <script src="{% static './assets/js/ace-extra.min.js' %}"></script>
+
+        <!--[if !IE]> -->
+        <script src="{% static './assets/js/jquery-2.1.4.min.js' %}"></script>
+        
+        <!-- <![endif]-->
+
+		<!--[if IE]>
+<script src="assets/js/jquery-1.11.3.min.js"></script>
+<![endif]-->
+		<script type="text/javascript">
+			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+		</script>
+		<script src="{% static './assets/js/bootstrap.min.js' %}"></script>
+
+		<!-- page specific plugin scripts -->
+		<script src="{% static './assets/js/jquery-ui.min.js' %}"></script>
+		<script src="{% static './assets/js/jquery.ui.touch-punch.min.js' %}"></script>
+
+		<!-- ace scripts -->
+		<script src="{% static './assets/js/ace-elements.min.js' %}"></script>
+		<script src="{% static './assets/js/ace.min.js' %}"></script>
+
+        <!-- inline scripts related to this page -->
+        
+        <script type="text/javascript">
+
+          
+            jQuery(function($) {
+			
+				$( "#datepicker" ).datepicker({
+					showOtherMonths: true,
+					selectOtherMonths: false,
+					//isRTL:true,
+			
+					
+					/*
+					changeMonth: true,
+					changeYear: true,
+					
+					showButtonPanel: true,
+					beforeShow: function() {
+						//change button colors
+						var datepicker = $(this).datepicker( "widget" );
+						setTimeout(function(){
+							var buttons = datepicker.find('.ui-datepicker-buttonpane')
+							.find('button');
+							buttons.eq(0).addClass('btn btn-xs');
+							buttons.eq(1).addClass('btn btn-xs btn-success');
+							buttons.wrapInner('<span class="bigger-110" />');
+						}, 0);
+					}
+			*/
+				});
+			
+			
+				//override dialog's title function to allow for HTML titles
+				$.widget("ui.dialog", $.extend({}, $.ui.dialog.prototype, {
+					_title: function(title) {
+						var $title = this.options.title || '&nbsp;'
+						if( ("title_html" in this.options) && this.options.title_html == true )
+							title.html($title);
+						else title.text($title);
+					}
+				}));
+			
+				$( ".id-btn-dialog1" ).on('click', function(e) {
+					e.preventDefault();
+			
+					var dialog = $( ".dialog-message" ).removeClass('popup-content').dialog({
+						modal: true,
+						title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='ace-icon fa fa-check'></i>To Order</h4></div>",
+						title_html: true,
+						buttons: [ 
+							// {
+							// 	text: "Cancel",
+							// 	"class" : "btn btn-minier",
+							// 	click: function() {
+							// 		$( this ).dialog( "close" ); 
+							// 	} 
+							// },
+							{
+								text: "OK",
+								"class" : "btn btn-primary btn-minier",
+								click: function() {
+									$( this ).dialog( "close" ); 
+								} 
+							}
+						]
+                    });
+                });
+			
+					/**
+					dialog.data( "uiDialog" )._title = function(title) {
+						title.html( this.options.title );
+					};
+					**/
+				
+			
+			
+				$( "#id-btn-dialog2" ).on('click', function(e) {
+					e.preventDefault();
+				
+					$( "#dialog-confirm" ).removeClass('hide').dialog({
+						resizable: false,
+						width: '320',
+						modal: true,
+						title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> Empty the recycle bin?</h4></div>",
+						title_html: true,
+						buttons: [
+							{
+								html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Delete all items",
+								"class" : "btn btn-danger btn-minier",
+								click: function() {
+									$( this ).dialog( "close" );
+								}
+							}
+							,
+							{
+								html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancel",
+								"class" : "btn btn-minier",
+								click: function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						]
+					});
+				});
+			
+			
+				
+				//autocomplete
+				 var availableTags = [
+					"ActionScript",
+					"AppleScript",
+					"Asp",
+					"BASIC",
+					"C",
+					"C++",
+					"Clojure",
+					"COBOL",
+					"ColdFusion",
+					"Erlang",
+					"Fortran",
+					"Groovy",
+					"Haskell",
+					"Java",
+					"JavaScript",
+					"Lisp",
+					"Perl",
+					"PHP",
+					"Python",
+					"Ruby",
+					"Scala",
+					"Scheme"
+				];
+				$( "#tags" ).autocomplete({
+					source: availableTags
+				});
+			
+				//custom autocomplete (category selection)
+				$.widget( "custom.catcomplete", $.ui.autocomplete, {
+					_create: function() {
+						this._super();
+						this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+					},
+					_renderMenu: function( ul, items ) {
+						var that = this,
+						currentCategory = "";
+						$.each( items, function( index, item ) {
+							var li;
+							if ( item.category != currentCategory ) {
+								ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+								currentCategory = item.category;
+							}
+							li = that._renderItemData( ul, item );
+								if ( item.category ) {
+								li.attr( "aria-label", item.category + " : " + item.label );
+							}
+						});
+					}
+				});
+				
+				 var data = [
+					{ label: "anders", category: "" },
+					{ label: "andreas", category: "" },
+					{ label: "antal", category: "" },
+					{ label: "annhhx10", category: "Products" },
+					{ label: "annk K12", category: "Products" },
+					{ label: "annttop C13", category: "Products" },
+					{ label: "anders andersson", category: "People" },
+					{ label: "andreas andersson", category: "People" },
+					{ label: "andreas johnson", category: "People" }
+				];
+				$( "#search" ).catcomplete({
+					delay: 0,
+					source: data
+				});
+				
+				
+				//tooltips
+				$( "#show-option" ).tooltip({
+					show: {
+						effect: "slideDown",
+						delay: 250
+					}
+				});
+			
+				$( "#hide-option" ).tooltip({
+					hide: {
+						effect: "explode",
+						delay: 250
+					}
+				});
+			
+				$( "#open-event" ).tooltip({
+					show: null,
+					position: {
+						my: "left top",
+						at: "left bottom"
+					},
+					open: function( event, ui ) {
+						ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast" );
+					}
+				});
+			
+			
+				//Menu
+				$( "#menu" ).menu();
+			
+			
+				//spinner
+				var spinner = $( "#spinner" ).spinner({
+					create: function( event, ui ) {
+						//add custom classes and icons
+						$(this)
+						.next().addClass('btn btn-success').html('<i class="ace-icon fa fa-plus"></i>')
+						.next().addClass('btn btn-danger').html('<i class="ace-icon fa fa-minus"></i>')
+						
+						//larger buttons on touch devices
+						if('touchstart' in document.documentElement) 
+							$(this).closest('.ui-spinner').addClass('ui-spinner-touch');
+					}
+				});
+			
+				//slider example
+				$( "#slider" ).slider({
+					range: true,
+					min: 0,
+					max: 500,
+					values: [ 75, 300 ]
+				});
+			
+			
+			
+				//jquery accordion
+				$( "#accordion" ).accordion({
+					collapsible: true ,
+					heightStyle: "content",
+					animate: 250,
+					header: ".accordion-header"
+				}).sortable({
+					axis: "y",
+					handle: ".accordion-header",
+					stop: function( event, ui ) {
+						// IE doesn't register the blur when sorting
+						// so trigger focusout handlers to remove .ui-state-focus
+						ui.item.children( ".accordion-header" ).triggerHandler( "focusout" );
+					}
+				});
+				//jquery tabs
+				$( "#tabs" ).tabs();
+				
+				
+				//progressbar
+				$( "#progressbar" ).progressbar({
+					value: 37,
+					create: function( event, ui ) {
+						$(this).addClass('progress progress-striped active')
+							   .children(0).addClass('progress-bar progress-bar-success');
+					}
+				});
+			
+				
+				//selectmenu
+				 $( "#number" ).css('width', '200px')
+				.selectmenu({ position: { my : "left bottom", at: "left top" } })
+					
+            });
+            
+		</script>
+
+    </body>
+</html>

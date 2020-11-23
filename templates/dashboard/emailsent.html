@@ -1,0 +1,56 @@
+{% extends 'goshopbase/base.html' %}
+{% load static %}
+
+{% block body %}
+<!DOCTYPE html>
+<head></head>
+<body>
+    <p>email sent succeccfully</p>
+    <div class="row">
+        <div class="col-sm-6">
+            <h3 class="header blue lighter smaller">
+                <i class="ace-icon fa fa-calendar-o smaller-90"></i>
+                Datepicker
+            </h3>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group input-group-sm">
+                        <input type="text" id="datepicker" class="form-control" />
+                        <span class="input-group-addon">
+                            <i class="ace-icon fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div><!-- ./span -->
+
+        <div class="col-sm-6">
+            <h3 class="header blue lighter smaller">
+                <i class="ace-icon fa fa-list-alt smaller-90"></i>
+                Dialogs
+            </h3>
+            <!-- <a href="#" id="id-btn-dialog2" class="btn btn-info btn-sm">Confirm Dialog</a> -->
+            <a href="#" id="id-btn-dialog1" class="btn btn-purple btn-sm">Modal Dialog</a>
+
+            <div id="dialog-message" class="popup-content">
+                <p>
+                    This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.
+                </p>
+
+                <div class="hr hr-12 hr-double"></div>
+
+                <p>
+                    Currently using
+                    <b>36% of your storage space</b>.
+                </p>
+            </div><!-- #dialog-message -->
+            action="{% url 'like-post' %}"
+            {% if user not in post.liked.all %}
+                {% else %}
+                    button class="ui button negative" type="submit">Unlike</button>
+                {% endif %}
+        </div><!-- ./span -->
+    </div><!-- ./row -->
+</body>
+{% endblock %}

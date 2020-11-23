@@ -1,0 +1,95 @@
+/* modal box */
+.popup-overlay {
+    visibility: hidden;
+    
+}
+    
+.popup-content {
+    visibility: hidden;
+}
+.popup-overlay.active{
+    visibility: visible;
+    
+}
+    
+.popup-content.active {
+    visibility: visible;
+}
+#hide-button.active {
+    visibility: hidden;
+}
+
+.container .box {  
+    width:200px;  
+    margin-right:0;
+        
+}  
+.container .box .box-row { 
+    display:table-row;  
+}   
+.container .box .box-cell.box1 {  
+    background:white;  
+    color:Black;  
+    text-align:justify;
+      
+}  
+/* .container .box .box-cell.box2 {  
+    background:red;  
+    text-align:justify;  
+}
+.container .box .box-cell.box3 {  
+    background:red;  
+    text-align:justify;
+} */
+.leftbox { 
+    float:left;  
+    background:Red; 
+    width:25%; 
+    height:280px; 
+}
+.two-columns {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+}
+.three{
+    column-count: 4;
+    -webkit-column-count: 4;
+    -moz-column-count: 4;
+}
+@media (min-width:600px) {
+.sidenav {
+    float:left;
+    height:1500px;
+    width:20%;
+    position: -webkit-sticky;
+    z-index:1;
+    /* top:0%; */
+    right:0;
+    overflow-x: hidden;
+    padding-top:20px;
+    margin: 0 1.5%;
+    
+    
+}
+.content{
+    margin-left: 0;
+    height: 1500px;
+    width: auto;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+    
+}
+.content-box{
+    margin-left: 0;
+    height: 1000px;
+    width: auto;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+}
+.countbtn button:hover{
+    border: black 5px solid;
+}
+}
