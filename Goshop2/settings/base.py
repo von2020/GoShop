@@ -54,9 +54,7 @@ INSTALLED_APPS = [
     'sales',
     'cart',
     'cloudinary',
-    'django_email_verification',
-    # 'shop',
-    # 'social_widgets',
+    
 ]
 
 MIDDLEWARE = [
