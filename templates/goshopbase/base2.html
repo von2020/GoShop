@@ -1,0 +1,676 @@
+{% load static %}
+{% load cart_tag %}
+
+{% include 'dashboard/message.html' %}
+
+
+<!-- {% load blog_tags %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Basic page needs -->
+<meta charset="utf-8">
+<!--[if IE]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>GoShop</title>
+<meta name="description" content="best template, template free, responsive Template, fashion store, responsive Template, responsive html Template, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template">
+<meta name="keywords" content="bootstrap, ecommerce, fashion, layout, responsive, responsive template, responsive template download, responsive Template, retail, shop, shopping, store, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template"/>
+
+<!-- Mobile specific metas  -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Favicon  -->
+<link rel="shortcut icon" href="{% static 'assets/favicon1.ico' %}" type="image/x-icon">
+
+<!-- CSS Style -->
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/cloud-zoom.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/blogmate.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/flexslider.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/fancybox.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jquery.bxslider.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jquery.fancybox.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jtv-mobile-menu.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.transitions.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/pe-icon-7-stroke.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/quick_view_popup.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/revolution-slider.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/simple-line-icons.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/venom-button.min.css' %}">
+
+</head>
+
+<body class="cms-index-index cms-home-page">
+  <div id="jtv-mobile-menu">
+    <ul>
+      <li>
+        <div class="jtv-search-mob">
+          <form id="search1" name="search">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> </button>
+              </div>
+              <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term" id="srch-term">
+            </div>
+          </form>
+        </div>
+      </li>
+      <li><a href="/dashboard/home">Home</a> </li>
+      {% for cat in cats %}
+
+      {% if not cat.children.all %}
+      
+      <li><a>{{ cat.name }}</a>
+        {% else %}
+        <li><a>{{ cat.name }}</a>
+        <ul>
+          {% for subcategory in cat.children.all %}
+          <li> <a href="/dashboard/product_category/{{subcategory.id}}"><span>{{ subcategory.name }}</span></a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </li>
+      
+
+      
+      {% endif %}
+      {% endfor %}
+    </ul>
+    
+    <div class="jtv-top-link-mob">
+      <ul class="links">
+        <li><a title="My Account" href="/accounts/register">Register</a> </li>
+        
+        <li><a title="Checkout" href="/dashboard/cart/checkout">Checkout</a> </li>
+        <li class="last"><a title="Login" href="/accounts/logout"><span>Log Out</span></a> </li>
+      </ul>
+    </div>
+  </div>
+
+<!-- mobile menu -->
+
+<div id="page"> 
+  <!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]--> 
+  
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="header-top">
+        <div class="container">
+          <div class="row"> 
+            <!-- Header Language -->
+            <div class="col-xs-12 col-sm-4 col-md-6">
+              <div class="welcome-msg">Welcome to our store! {{request.user.firstname}}  {{request.user.lastname}}</div>
+              
+              <!-- End Header Language --> 
+              
+              <!-- Header Currency -->
+              
+              <!-- End Header Currency --> 
+              
+            </div>
+            <div class="col-xs-6 col-sm-8 col-md-6 hidden-xs"> 
+              <!-- Header Top Links -->
+              <div class="jtv-top-links">
+                <div class="links">
+                  <ul>
+                    
+                    <li> <a title="My Account" href="/accounts/profile"><span class="hidden-xs">Profile</span></a> </li>
+                    <li> <a title="Checkout" href="/dashboard/cart/checkout"><span class="hidden-xs">Checkout</span></a> </li>
+                    <!-- <li>
+                      <div class="dropdown block-company-wrapper hidden-xs"> <a role="button" data-toggle="dropdown" data-target="#" class="block-company dropdown-toggle" href="#"> More <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="about_us.html"> About Us </a> </li>
+                          <li><a href="#"> Customer Service </a> </li>
+                          <li><a href="#"> Privacy Policy </a> </li>
+                          <li><a href="sitemap.html">Site Map </a> </li>
+                          
+                        </ul>
+                      </div>
+                    </li> -->
+                    <li> <a href="/accounts/logout"><span class="hidden-xs">Log Out</span></a> </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- End Header Top Links --> 
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+            <div class="jtv-top-cart-box"> 
+              <!-- Top Cart -->
+              <div class="mini-cart">
+                
+                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a> <i class="pe-7s-cart"></i><span class="cart_count"></span><span class="price">My Cart </span> </a> </div>
+                <div>
+                  <div class="jtv-top-cart-content"> 
+                    
+                    <!--block-subtitle-->
+                    
+                    <ul class="mini-products-list" id="cart-sidebar">
+                      {% for key,value in request.session.cart.items %}
+                      <li class="item first">
+                        <div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#"><img src="{{value.image}}" class="img-thumbnail img-responsive" style="max-width:50%;"> </a>
+                          <div class="product-details">
+                            <!-- <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div> -->
+                            <p class="product-name"><a>{{value.name}}</a> </p>
+                            <strong>{{value.quantity}}</strong> x <span class="price">{{ value.price }}</span> </div>
+                        </div>
+                      </li>
+                      {% endfor %} 
+                    </ul>
+                    
+                    <!--actions-->
+                    <div class="actions">
+                      <a href="/dashboard/cart/checkout" class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Checkout</span> </a>
+                      <a href="/dashboard/cart/cart-detail" class="view-cart"><span>View Cart</span></a> </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+          <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12 jtv-logo-box"> 
+            <!-- Header Logo -->
+            <div class="logo"> <a title="eCommerce" href="/dashboard/home"><img class="img-responsive" alt="eCommerce" src="{% static 'assets/images/goshop1.jpg' %}"> </a> </div>
+            <!-- End Header Logo --> 
+          </div>
+          <div id="myButton"></div>
+          <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
+            <div class="search-box">
+              <form action="cat" method="POST" id="search_mini_form" name="Categories">
+                <input type="text" placeholder="Search entire store here..." value="Search" maxlength="70" name="search" id="search">
+                <button type="button" class="search-btn-bg"><i class="pe-7s-search"></i>&nbsp;</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>   
+      
+    </div>
+  </header>
+  <!-- end header --> 
+  
+  <!-- Navigation -->
+  
+  <nav>
+    <div class="container">
+      
+      <div class="nav-inner">
+      <div class="mm-toggle-wrap hidden-sm hidden-md hidden-lg">
+        <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Categories</span> </div>
+      </div> 
+        <!-- BEGIN NAV -->
+        <ul id="nav" class="hidden-xs">
+          <li class="drop-menu"><a href="/dashboard/home" class="level-top active"><span>Home</span></a>
+          </li>
+          {% for cat in cats %}
+        
+          {% if not cat.children.all %}
+          <li class="mega-menu"> <a class="level-top"><span>{{ cat.name }}</span></a>
+            {% else %}
+          <li class="mega-menu"> <a class="level-top"><span>{{ cat.name }}</span></a>
+            
+            <div class="jtv-menu-block-wrapper">
+              <div class="jtv-menu-block-wrapper2">
+                <div class="nav-block jtv-nav-block-center">
+                  
+                  <div class="col-1">
+                    {% for subcategory in cat.children.all %}
+                    <div class="col-1 col-2 ">
+                    <ul class="level0">
+                      <li class="parent item"> <a href="/dashboard/product_category/{{subcategory.id}}"><span>{{ subcategory.name }}</span></a>
+                        
+                        
+                      </li>
+                      
+                    </ul>
+                  </div>
+                    {% endfor %} 
+                  </div>
+                  
+                  <div class="col-2">
+                    <div class="jtv-nav-image1"> <a title="" ><img class="img-responsive" alt="menu_image" src="{% static 'assets/images/goshop.jpg' %}"> </a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </li>
+          
+          {% endif %}
+          {% endfor %}
+          
+          <!-- <li class="mega-menu"> <a class="level-top" href="#"><span>Blog</span></a> </li> -->
+          
+        </ul>
+         </div></div>
+  </nav>
+  <!-- end nav --> 
+  
+  <!-- JTV Home Slider -->
+  <div class="jtv-slideshow">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+          <div id='jtv-rev_slider_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
+            <div id='jtv-rev_slider' class='rev_slider fullwidthabanner'>
+              <ul>
+                <li data-transition='fade' data-slotamount='7' data-masterspeed='1000' data-thumb="{% static 'assets/images/pics.jpg' %}" ><img class="img-responsive" src="{% static 'assets/images/pics.jpg' %}" alt="slide-img" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
+                  <div class="info">
+                    <div class='tp-caption jtv-sub-title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap; color:#393b7d;'><span>Welcome to our store!</span> </div>
+                    <div class='tp-caption jtv-large-title sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'><span style="color:#000;">{{request.user.firstname}}  {{request.user.lastname}}</span> </div>
+                    <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1450' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap; color:#666;'>Quality and Affordable</div>
+                    <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap; font-size:18px;'><a href='#' class="jtv-shop-now-btn">Shop Now</a> </div>
+                  </div>
+                </li>
+                <li data-transition='fade' data-slotamount='7' data-masterspeed='1000' data-thumb="{% static 'assets/images/pics2.jpg' %}"><img class="img-responsive" src="{% static 'assets/images/pics2.jpg' %}" alt="slide-img" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
+                  <div class="info">
+                    <div class='tp-caption jtv-sub-title sft slide2  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;padding-right:0px; color:#999;'><span>Welcome to our store!</span> </div>
+                    <div class='tp-caption jtv-large-title sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap; color:#393b7d;'>{{request.user.firstname}}  {{request.user.lastname}}</div>
+                    <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Quality and Affordable</div>
+                    <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn">Shop Now</a> </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- end JTV Home Slider -->
+        <div class="col-md-3 col-sm-12">
+          <div class="jtv-text-top-banner col-sm-6 col-md-12"> <a title=""> <img class="img-responsive" src="{% static 'assets/images/pics3.jpg' %}" alt=""> <span class="jtv-b-content bottom-left"> <span class="title"> <span class="title-color">Mens</span><br>
+            <span class="black-text">Collection</span></span> <span class="text">Never Miss a Second</span> <span class="btn-buy"><span>Buy now</span></span> </span> <span class="jtv-b-price-box"> <span class="banner-text-wrapper"> <span class="jtv-b-price-text">From</span> <span class="jtv-b-price">$99</span> </span> </span> </a></div>
+          <div class="jtv-text-top-banner col-sm-6 col-md-12"> <a title=""> <img class="img-responsive" src="{% static 'assets/images/pics4.jpg' %}" alt=""> <span class="jtv-b-content top-center"> <span class="title white-text">Smart Phone<br>
+            Exclusively Available On</span> </span> </a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- our features -->
+  <div class="our-features-box hidden-xs">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <div class="feature-box first"> <i class="pe-7s-piggy"></i>
+            <div class="content">
+              <h3>Reasonable pricing</h3>
+              <p>To establish a selling price for a product</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <div class="feature-box"> <i class="pe-7s-timer"></i>
+            <div class="content">
+              <h3>Limited time offers</h3>
+              <p>Hurry up! You Don't want to miss This!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-xs-12 col-sm-4">
+          <div class="feature-box"> <i class="pe-7s-headphones"></i>
+            <div class="content">
+              <h3>24/7 client support</h3>
+              <p>In order to provide 24X7 customer support</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  {% block content %}
+
+{% endblock  %}
+  <!-- Brand Logo -->
+  
+  <!-- <div class="brand-logo">
+    <div class="container">
+      <div class="slider-items-products">
+        <div id="brand-logo-slider" class="product-flexslider hidden-buttons">
+          <div class="slider-items slider-width-col6"> 
+            
+            <div class="item"> <a><img class="img-responsive" src="{% static 'assets/images/goshop.jpg' %}" alt="Image"> </a> </div>
+            
+            
+            
+            <div class="item"> <a><img class="img-responsive" src="{% static 'assets/images/goshop3.jpg' %}" alt="Image"> </a> </div>
+             
+            
+            
+            <div class="item"> <a ><img class="img-responsive" src="{% static 'assets/images/goshop.jpg' %}" alt="Image"> </a> </div> 
+            
+            
+            <div class="item"> <a><img class="img-responsive" src="{% static 'assets/images/goshop3.jpg' %}" alt="Image"> </a> </div>
+             
+            
+            
+            <div class="item"> <a ><img class="img-responsive" src="{% static 'assets/images/goshop.jpg' %}" alt="Image"> </a> </div>
+             
+            
+            
+            <div class="item"> <a ><img class="img-responsive" src="{% static 'assets/images/goshop3.jpg' %}" alt="Image"> </a> </div>
+             
+            
+            
+            <div class="item"> <a ><img class="img-responsive" src="{% static 'assets/images/goshop.jpg' %}" alt="Image"> </a> </div>
+             
+            
+            
+            <div class="item"> <a><img class="img-responsive" src="{% static 'assets/images/goshop3.jpg' %}" alt="Image"> </a> </div>
+             
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="jtv-text-top-banner"> <a title=""> <img class="img-responsive" src="{% static 'assets/images/pics4.jpg' %}" alt=""> <span class="jtv-b-content top-left"> <span class="banner-label-wrapper"> <span class="banner-label small pink-bg">25%<br>
+          <em>off</em></span> </span> </span> <span class="jtv-b-content bottom-left"> <span class="text">Only in our store</span> <span class="title"><span class="black-text">Special Offer</span><br>
+          <small>Exclusive Savings</small></span> </span> </a></div>
+      </div>
+      <div class="col-sm-4">
+        <div class="jtv-text-top-banner"> <a title=""> <img class="img-responsive" src="{% static 'assets/images/pics6.jpg' %}" alt=""> <span class="jtv-b-content top-center"> <span class="title"><span class="black-text">Smart Camera</span><br>
+          <small>Superior Image Quality</small></span> </span> </a></div>
+      </div>
+      <div class="col-sm-4">
+        <div class="jtv-text-top-banner"> <a title=""> <img class="img-responsive" src="{% static 'assets/images/pics7.jpg' %}" alt=""> <span class="jtv-b-content middle-center"> <span class="strong-title">45% OFF</span> </span> <span class="jtv-b-content bottom-center"> <span class="text-left"> <span class="media-body text-right"><span class="subtitle skincolor">Best<br>
+          Headphones</span></span> </span> </span> <span class="jtv-b-price-box"> <span class="banner-text-wrapper"> <span class="jtv-b-price-text">From</span> <span class="jtv-b-price">$29</span> </span> </span> </a></div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <footer>
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <!-- <div style="text-align:center"> <a href="/dashboard/home"><img class="img-responsive" src="{% static 'assets/images/goshop1.jpg' %}" alt="logo"> </a> </div> -->
+          <address>
+          <p> <i class="pe-7s-map-marker"></i>Company, GoShop </p>
+          <p><i class="pe-7s-call"></i><span>+ (800) 0123 456 789</span> </p>
+          <p> <i class="pe-7s-mail-open"></i><span><a href="mailto:goshopperfect@gmail.com">goshopperfect@gmail.com</a></span></p>
+          </address>
+        </div>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-xs-12 col-md-3">
+            <div class="footer-links">
+              <h4>Useful links</h4>
+              <ul class="links">
+                <li><a title="Product Recall">Product Recall</a></li>
+                <li><a  title="Gift Vouchers">Gift Vouchers</a></li>
+                <li><a title="Returns &amp; Exchange">Returns &amp; Exchange</a></li>
+                <li><a title="Shipping Options">Shipping Options</a></li>
+                <li><a title="Help &amp; FAQs">Help &amp; FAQs</a></li>
+                <li><a  title="Order history">Order history</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12 col-md-3">
+            <div class="footer-links">
+              <h4>Service</h4>
+              <ul class="links">
+                <li><a>Account</a></li>
+                <li><a>Wishlist</a></li>
+                <li><a>Shopping Cart</a></li>
+                <li><a>Return Policy</a></li>
+                <li><a>Special</a></li>
+                <li><a>Lookbook</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-12 col-md-2">
+            <div class="footer-links">
+              <h4>Information</h4>
+              <ul class="links">
+                <li><a>Sites Map </a></li>
+                <li><a>News</a></li>
+                <li><a>Trends</a></li>
+                <li><a>About Us</a></li>
+                <li><a>Contact Us</a></li>
+                <li><a>My Orders</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="footer-links">
+              <div class="footer-newsletter">
+                <h4>Subscribe to our news</h4>
+                <form id="newsletter-validate-detail" method="post" action="#">
+                  {% csrf_token %}
+                    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+                  <div class="newsletter-inner">
+                    <p>Subscribe to be the first to know about Sales, Events, and Exclusive Offers!</p>
+                    {{form.email}}
+                    <button class="button subscribe" type="submit" title="Subscribe">Subscribe</button>
+                  </div>
+                </form>
+              </div>
+              <div class="social">
+                <h4>Follow Us</h4>
+                <ul class="inline-mode">
+                  <li class="social-network fb"><a title="Connect us on Facebook" target="_blank" href="https://web.facebook.com/GOShop-106197331098319"><i class="fa fa-facebook"></i></a></li>
+                  <!-- <li class="social-network googleplus"><a title="Connect us on Google+" target="_blank" href="https://twitter.com/GoShop47322089"><i class="fa fa-google-plus"></i></a></li> -->
+                  <li class="social-network tw"><a title="Connect us on Twitter" target="_blank" href="https://twitter.com/GoShop47322089"><i class="icon-social-twitter icons"></i></a></li>
+                  <li class="social-network linkedin"><a title="Connect us on Linkedin" target="_blank" href="https://www.pinterest.com/goshopperfect/pins/"><i class="fa fa-linkedin"></i></a></li>
+                  <!-- <li class="social-network rss"><a title="Connect us on rss" target="_blank" href="https://instagram.com/"><i class="fa fa-rss"></i></a></li> -->
+                  <li class="social-network instagram"><a title="Connect us on Instagram" target="_blank" href="https://instagram.com/"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7 col-md-6 col-xs-12 coppyright">Copyright © 2021 <a href="#"> GoShop </a>. All Rights Reserved. </div>
+          <div class="col-sm-5 col-md-6 col-xs-12 payment-accept">
+            <!-- <ul>
+              <li> <a href="#"><img class="img-responsive" src="{% static 'assets/images/payment-1.png' %}" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img class="img-responsive" src="{% static 'assets/images/payment-2.png' %}" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img class="img-responsive" src="{% static 'assets/images/payment-3.png' %}" alt="Payment Card"></a> </li>
+              <li> <a href="#"><img class="img-responsive" src="{% static 'assets/images/payment-4.png' %}" alt="Payment Card"></a> </li>
+            </ul> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- End Footer --> 
+
+<!-- jquery js --> 
+<script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script> 
+
+<!-- bootstrap js --> 
+<script type="text/javascript" src="{% static 'assets/js/bootstrap.min.js' %}"></script> 
+
+<!-- owl.carousel.min js --> 
+<script type="text/javascript" src="{% static 'assets/js/owl.carousel.min.js' %}"></script> 
+
+<!-- jtv-jtv-mobile-menu js --> 
+<script type="text/javascript" src="{% static 'assets/js/jtv-mobile-menu.js' %}"></script> 
+
+<!-- countdown js --> 
+<script type="text/javascript" src="{% static 'assets/js/countdown.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/jquery.fancybox.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/jquery.flexslider.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/cloudzoom.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/cloud-zoom.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/venom-button.min.js' %}"></script>
+
+<!-- main js --> 
+<script type="text/javascript" src="{% static 'assets/js/main.js' %}"></script>
+
+
+<!-- rev-slider js --> 
+<script type="text/javascript" src="{% static 'assets/js/rev-slider.js' %}"></script> 
+
+<script>
+  $('#myButton').venomButton({
+
+  phone:'+2349066672305',
+
+  chatMessage:'Chat Window Title',
+
+  message:"Hi There",
+
+  nameClient:"jQuery Script",
+
+  showPopup:true
+
+});
+
+</script>
+
+<script type='text/javascript'>
+
+
+
+jQuery(document).ready(function() {
+jQuery('#jtv-rev_slider').show().revolution({
+dottedOverlay: 'none',
+delay: 5000,
+startwidth: 945,
+startheight: 550,
+hideThumbs: 200,
+thumbWidth: 200,
+thumbHeight: 50,
+thumbAmount: 2,
+navigationType: 'thumb',
+navigationArrows: 'solo',
+navigationStyle: 'round',
+touchenabled: 'on',
+onHoverStop: 'on',
+swipe_velocity: 0.7,
+swipe_min_touches: 1,
+swipe_max_touches: 1,
+drag_block_vertical: false,
+spinner: 'spinner0',
+keyboardNavigation: 'off',
+navigationHAlign: 'center',
+navigationVAlign: 'bottom',
+navigationHOffset: 0,
+navigationVOffset: 20,
+soloArrowLeftHalign: 'left',
+soloArrowLeftValign: 'center',
+soloArrowLeftHOffset: 20,
+soloArrowLeftVOffset: 0,
+soloArrowRightHalign: 'right',
+soloArrowRightValign: 'center',
+soloArrowRightHOffset: 20,
+soloArrowRightVOffset: 0,
+shadow: 0,
+fullWidth: 'on',
+fullScreen: 'off',
+stopLoop: 'off',
+stopAfterLoops: -1,
+stopAtSlide: -1,
+shuffle: 'off',
+autoHeight: 'off',
+forceFullWidth: 'on',
+fullScreenAlignForce: 'off',
+minFullScreenHeight: 0,
+hideNavDelayOnMobile: 1500,
+hideThumbsOnMobile: 'off',
+hideBulletsOnMobile: 'off',
+hideArrowsOnMobile: 'off',
+hideThumbsUnderResolution: 0,
+hideSliderAtLimit: 0,
+hideCaptionAtLimit: 0,
+hideAllCaptionAtLilmit: 0,
+startWithSlide: 0,
+fullScreenOffsetContainer: ''
+});
+});
+</script> 
+<!-- Hot Deals Timer 1--> 
+<script type="text/javascript">
+var dthen1 = new Date("12/25/17 11:59:00 PM");
+start = "08/04/15 03:02:11 AM";
+start_date = Date.parse(start);
+var dnow1 = new Date(start_date);
+if (CountStepper > 0)
+ddiff = new Date((dnow1) - (dthen1));
+else
+ddiff = new Date((dthen1) - (dnow1));
+gsecs1 = Math.floor(ddiff.valueOf() / 1000);
+
+var iid1 = "countbox_1";
+CountBack_slider(gsecs1, "countbox_1", 1);
+</script> 
+<!--Newsletter Popup Start-->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog newsletter-popup">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <div class="modal-body">
+        <h4 class="modal-title">Signup Newsletter</h4>
+        <form id="newsletter-form" method="post" action="#">
+          <div class="content-subscribe">
+            <div class="form-subscribe-header">
+              <label>Subscribe to our newsletters and don't miss new arrivals,<br>
+                the latest fashion updates and our promotions.</label>
+            </div>
+            <div class="input-box">
+              <input type="text" class="input-text newsletter-subscribe" title="Sign up for our newsletter" name="email" placeholder="Enter your email address">
+            </div>
+            <div class="actions">
+              <button class="button-subscribe" title="Subscribe" type="submit">Subscribe</button>
+            </div>
+          </div>
+        </form>
+        <div class="subscribe-bottom">
+          <input name="notshowpopup" id="notshowpopup" type="checkbox">
+          Don’t show this popup again </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End of Newsletter Popup-->
+
+</body>
+</html>

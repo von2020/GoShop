@@ -1,0 +1,854 @@
+{% load static %}
+{% load cart_tag %}
+
+{% include 'dashboard/message.html' %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Basic page needs -->
+<meta charset="utf-8">
+<!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <![endif]-->
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>GoShop</title>
+<meta name="description" content="best template, template free, responsive Template, fashion store, responsive Template, responsive html Template, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template">
+<meta name="keywords" content="bootstrap, ecommerce, fashion, layout, responsive, responsive template, responsive template download, responsive Template, retail, shop, shopping, store, Premium website templates, web templates, Multi-Purpose Responsive HTML5 Template"/>
+
+<!-- Mobile specific metas  -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Favicon  -->
+
+
+<!-- CSS Style -->
+
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/cloud-zoom.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/blogmate.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/flexslider.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/fancybox.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jquery.bxslider.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jquery.fancybox.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/jtv-mobile-menu.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.transitions.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/pe-icon-7-stroke.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/quick_view_popup.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/revolution-slider.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/simple-line-icons.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/venom-button.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/zebra_dialog.css' %}">
+
+</head>
+
+<body class="checkout_page">
+<!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]--> 
+
+<!-- mobile menu -->
+<div id="jtv-mobile-menu">
+    <ul>
+      <li>
+        <div class="jtv-search-mob">
+          <form id="search1" name="search">
+            <div class="input-group">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> </button>
+              </div>
+              <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term" id="srch-term">
+            </div>
+          </form>
+        </div>
+      </li>
+      <li><a href="/">Home</a> </li>
+      {% for cat in cats %}
+  
+      {% if not cat.children.all %}
+      
+      <li><a>{{ cat.name }}</a>
+        {% else %}
+        <li><a>{{ cat.name }}</a>
+        <ul>
+          {% for subcategory in cat.children.all %}
+          <li> <a href="/product_category/{{subcategory.id}}"><span>{{ subcategory.name }}</span></a>
+          </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </li>
+    {% endif %}
+  
+      {% endfor %}
+    </ul>
+    
+    <div class="jtv-top-link-mob">
+      <ul class="links">
+        <li><a title="My Account" href="/accounts/register">Register</a> </li>
+        
+        <li><a title="Checkout" href="/cart/checkout">Checkout</a> </li>
+        <li class="last"><a title="Login" href="/accounts/login"><span>Login</span></a> </li>
+      </ul>
+    </div>
+  </div>
+<!-- end mobile menu -->
+<div id="page"> 
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="header-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-4 col-md-4 col-xs-12"> 
+              <!-- Default Welcome Message -->
+              <div class="welcome-msg hidden-xs hidden-sm">welcome </div>
+              <!-- Language &amp; Currency wrapper -->
+              <!-- <div class="language-currency-wrapper">
+                <div class="inner-cl">
+                  <div class="block block-language form-language">
+                    <div class="lg-cur"><span><img src="images/flag-default.jpg" alt="French"><span class="lg-fr">French</span><i class="fa fa-angle-down"></i></span></div>
+                    <ul>
+                      <li><a class="selected" href="#"><img src="images/flag-english.jpg" alt="english"><span>English</span></a></li>
+                      <li><a href="#"><img src="images/flag-default.jpg" alt="French"><span>French</span></a></li>
+                      <li><a href="#"><img src="images/flag-german.jpg" alt="German"><span>German</span></a></li>
+                      <li><a href="#"><img src="images/flag-brazil.jpg" alt="Brazil"><span>Brazil</span></a></li>
+                      <li><a href="#"><img src="images/flag-chile.jpg" alt="Chile"><span>Chile</span></a></li>
+                      <li><a href="#"><img src="images/flag-spain.jpg" alt="Spain"><span>Spain</span></a></li>
+                    </ul>
+                  </div>
+                  <div class="block block-currency">
+                    <div class="item-cur"><span>USD</span><i class="fa fa-angle-down"></i></div>
+                    <ul>
+                      <li><a href="#"><span class="cur_icon">€</span>EUR</a></li>
+                      <li><a href="#"><span class="cur_icon">¥</span>JPY</a></li>
+                      <li><a class="selected" href="#"><span class="cur_icon">$</span>USD</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            
+            <div class="col-xs-6 col-sm-8 col-md-6 hidden-xs"> <span class="phone  hidden-xs hidden-sm">Call Us: +2349066672305</span>
+                <!-- Header Top Links -->
+                <div class="jtv-top-links">
+                  <div class="links">
+                    <ul>
+                      <li> <a title="My Account" href="/accounts/register"><span class="hidden-xs">Register</span></a> </li>
+                      
+                      
+                      <li> <a href="/accounts/login"><span class="hidden-xs">Log In</span></a> </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- End Header Top Links --> 
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- header inner -->
+      <div class="header-inner">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3 col-xs-12 jtv-logo-block">
+              <!-- Header Logo -->
+              <div class="logo"> <a title="GoShop" ><img class="img-responsive" alt="eCommerce" src="{% static 'assets/images/goshop1.jpg' %}"> </a> </div>
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-6 jtv-top-search"> 
+              
+              <!-- Search -->
+              
+              
+              
+              <!-- End Search --> 
+              
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <div class="jtv-top-cart-box"> 
+                  <!-- Top Cart -->
+                  <div class="mini-cart">
+                    <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a > <i class="pe-7s-cart"></i><span class="cart_count"></span><span class="price">My Cart </span> </a> </div>
+                    <div>
+                      <div class="jtv-top-cart-content"> 
+                        
+                        <!--block-subtitle-->
+                        
+                        <ul class="mini-products-list" id="cart-sidebar">
+                          {% for key,value in request.session.cart.items %}
+                          <li class="item first">
+                            <div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#"><img src="{{value.image}}" class="img-thumbnail img-responsive" style="max-width:50%;"> </a>
+                              <div class="product-details">
+                                <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
+                                <p class="product-name"><a href="#">{{value.name}}</a> </p>
+                                <strong>{{value.quantity}}</strong> x <span class="price">{{ value.price }}</span> </div>
+                            </div>
+                          </li>
+                          {% endfor %}
+                        </ul>
+                        
+                        <!--actions-->
+                        <div class="actions">
+                          <a href="/cart/checkout" class="btn-checkout" title="Checkout" type="button" onClick="checkout.html"><span>Checkout</span> </a>
+                          <a href="/cart/cart-detail" class="view-cart"><span>View Cart</span></a> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- end header -->
+  <nav>
+    <div class="container">
+      
+      <div class="nav-inner">
+      <div class="mm-toggle-wrap hidden-sm hidden-md hidden-lg">
+        <div class="mm-toggle"><i class="fa fa-align-justify"></i><span class="mm-label">Categories</span> </div>
+      </div> 
+        <!-- BEGIN NAV -->
+        <ul id="nav" class="hidden-xs">
+          <li class="drop-menu"><a href="/" class="level-top active"><span>Home</span></a>
+          </li>
+          {% for cat in cats %}
+        
+          {% if not cat.children.all %}
+          <li class="mega-menu"> <a class="level-top"><span>{{ cat.name }}</span></a>
+            {% else %}
+          <li class="mega-menu"> <a class="level-top"><span>{{ cat.name }}</span></a>
+            
+            <div class="jtv-menu-block-wrapper">
+              <div class="jtv-menu-block-wrapper2">
+                <div class="nav-block jtv-nav-block-center">
+                  
+                  <div class="col-1">
+                    {% for subcategory in cat.children.all %}
+                    <div class="col-1 col-2 ">
+                    <ul class="level0">
+                      <li class="parent item"> <a href="/product_category/{{subcategory.id}}"><span>{{ subcategory.name }}</span></a>
+                        
+                        
+                      </li>
+                      
+                    </ul>
+                  </div>
+                    {% endfor %} 
+                  </div>
+                  
+                  <div class="col-2">
+                    <div class="jtv-nav-image1"> <a title="" ><img class="img-responsive" alt="menu_image" src="{% static 'assets/images/goshop.jpg' %}"> </a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </li>
+          
+          {% endif %}
+          {% endfor %}
+          
+          <!-- <li class="mega-menu"> <a class="level-top" href="#"><span>Blog</span></a> </li> -->
+          
+        </ul>
+         </div></div>
+  </nav> 
+  
+  <!-- Breadcrumbs -->
+  
+  <div class="breadcrumbs">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <ul>
+            <li class="home"> <a title="Go to Home Page" href="/">Home</a><span>&raquo;</span></li>
+            <li><strong>Checkout</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Breadcrumbs End --> 
+  
+  <!-- Main Container -->
+  <section class="main-container col2-right-layout">
+    <div class="main container">
+      <div class="row">
+        <div class="col-main col-sm-9 col-xs-12">
+<div class="page-title">
+              <h2>Checkout</h2>
+            </div>
+          <div class="page-content checkout-page">
+            
+            <h4 class="checkout-sep">1. Checkout Method</h4>
+            <div class="box-border">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h5>Checkout as a Guest or Register</h5>
+                  <p>Register with us for future convenience:</p>
+                  <ul>
+                    <li>
+                      <label>
+                        <input type="radio" name="radio1">
+                        Checkout as Guest</label>
+                    </li>
+                    <li>
+                      <label>
+                        <input type="radio" name="radio1">
+                        Register</label>
+                    </li>
+                  </ul>
+                  <br>
+                  <h4>Register and save time!</h4>
+                  <p>Register with us for future convenience:</p>
+                  <p><i class="fa fa-check-circle text-primary"></i> Fast and easy check out</p>
+                  <p><i class="fa fa-check-circle text-primary"></i> Easy access to your order history and status</p>
+                  <button class="button"><i class="fa fa-angle-double-right"></i>&nbsp; <span>Continue</span></button>
+                </div>
+                <div class="col-sm-6">
+                  <h5>Login</h5>
+                  <p>Already registered? Please log in below:</p>
+                  <a class="button" href="/accounts/login"><i class="icon-login"></i>&nbsp; <span>Login</span></a>
+                  <p><a href="/accounts/reset_password">Forgot your password?</a></p>
+                  
+                </div>
+              </div>
+            </div>
+            <h4 class="checkout-sep">2. Billing Infomations</h4>
+            <div class="box-border" >
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <ul class="form-list">
+        
+            <li class="row">
+                <div class="col-sm-6">
+              <label for="email">First Name <span >*</span></label>
+              <br>
+              {{ form.firstname}}
+            </div>
+            <div class="col-sm-6">
+                <label for="email">Last Name <span >*</span></label>
+                <br>
+                {{ form.lastname}}
+              </div>
+            </li>
+            <li class="row">
+            <div class="col-sm-6">
+              <label for="pass">Company Name <span >*</span></label>
+              <br>
+              {{ form.company_name}}
+            </div>
+            <div class="col-sm-6">
+            <label for="pass">Email <span >*</span></label>
+                <br>
+                  {{ form.email}}
+            </div>
+            </li>
+            <li class="row">
+                <div class="col-sm-6">
+                <label for="pass">Address <span >*</span></label>
+                <br>
+                    {{ form.address}}
+                </div>
+                <div class="col-sm-6">
+                    <label for="pass">Phone Number <span >*</span></label>
+                    <br>
+                        {{ form.telephone}}
+                </div>
+            </li>
+            <li class="row">
+                <div class="col-sm-6">
+                    <label >Product 1 <span >*</span></label>
+                    <br>
+                    {{ form.product_one}}
+                </div>
+                <div class="col-sm-6">
+                    <label >Quantity 1 <span >*</span></label>
+                    <br>
+                    {{ form.quantity_one}}
+                </div>
+                
+            </li>
+            <li class="row">
+                <div class="col-sm-6">
+                <label >Product 2 <span >*</span></label>
+                <br>
+                  {{ form.product_two}}
+                </div>
+                <div class="col-sm-6">
+                    <label >Quantity 2 <span >*</span></label>
+                    <br>
+                    {{ form.quantity_two}}
+                </div>
+            <li>
+            <li class="row">
+                <div class="col-sm-6">
+                    <label >Product 3<span >*</span></label>
+                    <br>
+                      {{ form.product_three}}
+                </div>
+                <div class="col-sm-6">
+                    <label >Quantity 3<span >*</span></label>
+                    <br>
+                      {{ form.quantity_three}}
+                </div>
+            </li>
+            <li class="row">
+                <div class="col-sm-6">
+                <label >Product 4 <span >*</span></label>
+                <br>
+                  {{ form.product_four}}
+                </div>
+                <div class="col-sm-6">
+                    <label >Quantity 4 <span >*</span></label>
+                    <br>
+                      {{ form.quantity_four}}
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-6">
+                    <label for="pass">Total Price <span >*</span></label>
+                    <br>
+                      {{ form.total_price}}
+                </div>
+                
+            </li>
+            <li>
+                
+            </li>
+            
+        </ul>
+        
+        
+              <div class="buttons-set">
+                <button   type="submit" class="button login" ><span>Order</span></button>
+                
+            </div>
+        </form>
+        
+
+              
+            </div>
+            <!-- <h4 class="checkout-sep">3. Shipping Information</h4> -->
+            <div class="box-border" style="display:none;">
+              <ul>
+                <li class="row">
+                  <div class="col-sm-6">
+                    <label for="first_name_1" class="required">First Name</label>
+                    <input class="input form-control" type="text" name="" id="first_name_1">
+                  </div>
+                  <!--/ [col] -->
+                  
+                  <div class="col-sm-6">
+                    <label for="last_name_1" class="required">Last Name</label>
+                    <input class="input form-control" type="text" name="" id="last_name_1">
+                  </div>
+                  <!--/ [col] --> 
+                  
+                </li>
+                <!--/ .row -->
+                
+                <li class="row">
+                  <div class="col-sm-6">
+                    <label for="company_name_1">Company Name</label>
+                    <input class="input form-control" type="text" name="" id="company_name_1">
+                  </div>
+                  <!--/ [col] -->
+                  
+                  <div class="col-sm-6">
+                    <label for="email_address_1" class="required">Email Address</label>
+                    <input class="input form-control" type="text" name="" id="email_address_1">
+                  </div>
+                  <!--/ [col] --> 
+                  
+                </li>
+                <!--/ .row -->
+                
+                <li class="row">
+                  <div class="col-xs-12">
+                    <label for="address_1" class="required">Address</label>
+                    <input class="input form-control" type="text" name="" id="address_1">
+                  </div>
+                  <!--/ [col] --> 
+                  
+                </li>
+                <!--/ .row -->
+                
+                <li class="row">
+                  <div class="col-sm-6">
+                    <label for="city_1" class="required">City</label>
+                    <input class="input form-control" type="text" name="" id="city_1">
+                  </div>
+                  <!--/ [col] -->
+                  
+                  <div class="col-sm-6">
+                    <label class="required">State/Province</label>
+                    <div class="custom_select">
+                      <select class="input form-control" name="">
+                        <option value="Alabama">Alabama</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Kansas">Kansas</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ [col] --> 
+                  
+                </li>
+                <!--/ .row -->
+                
+                <li class="row">
+                  <div class="col-sm-6">
+                    <label for="postal_code_1" class="required">Zip/Postal Code</label>
+                    <input class="input form-control" type="text" name="" id="postal_code_1">
+                  </div>
+                  <!--/ [col] -->
+                  
+                  <div class="col-sm-6">
+                    <label class="required">Country</label>
+                    <div class="custom_select">
+                      <select class="input form-control" name="">
+                        <option value="USA">USA</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Canada">Canada</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!--/ [col] --> 
+                  
+                </li>
+                <!--/ .row -->
+                
+                <li class="row">
+                  <div class="col-sm-6">
+                    <label for="telephone_1" class="required">Telephone</label>
+                    <input class="input form-control" type="text" name="" id="telephone_1">
+                  </div>
+                  <!--/ [col] -->
+                  
+                  <div class="col-sm-6">
+                    <label for="fax_1">Fax</label>
+                    <input class="input form-control" type="text" name="" id="fax_1">
+                  </div>
+                  <!--/ [col] --> 
+                  
+                </li>
+                <!--/ .row -->
+                
+              </ul>
+              <button class="button"><i class="fa fa-angle-double-right"></i>&nbsp; <span>Continue</span></button>
+            </div>
+            <!-- <h4 class="checkout-sep">4. Shipping Method</h4> -->
+            <!-- <div class="box-border" style="display:none;">
+              <ul class="shipping_method">
+                <li>
+                  <p class="subcaption bold">Free Shipping</p>
+                  <label for="radio_button_3">
+                    <input type="radio" checked name="radio_3" id="radio_button_3">
+                    Free $0</label>
+                </li>
+                <li>
+                  <p class="subcaption bold">Free Shipping</p>
+                  <label for="radio_button_4">
+                    <input type="radio" name="radio_3" id="radio_button_4">
+                    Standard Shipping $5.00</label>
+                </li>
+              </ul>
+              <button class="button"><i class="fa fa-angle-double-right"></i>&nbsp; <span>Continue</span></button>
+            </div> -->
+            <h4 class="checkout-sep">5. Payment Method</h4>
+            <div class="box-border" >
+              <ul>
+                <li>
+                  <label for="radio_button_5">
+                    <input type="radio" checked name="radio_4" id="radio_button_5">
+                    Check / Money order</label>
+                </li>
+                <li>
+                  <label for="radio_button_6">
+                    <a href="javascript:void(0)" id="example1">Transfer</a>
+                    
+                </li>
+              </ul>
+              <button class="button"><i class="fa fa-angle-double-right"></i>&nbsp; <span>Continue</span></button>
+            </div>
+            <div id="myButton"></div>
+            <h4 class="checkout-sep last">6. Order Review</h4>
+            
+            <div class="box-border" >
+              <div class="table-responsive">
+                <table class="table table-bordered cart_summary" id="table">
+                  <thead>
+                    <tr>
+                      <th class="cart_product">Product</th>
+                      <th>Description</th>
+                      <!-- <th>Avail.</th> -->
+                      <th>Unit price</th>
+                      <th>Qty</th>
+                      <th>Total</th>
+                      <th class="action"><i class="fa fa-trash-o"></i></th>
+                    </tr>
+                  </thead>
+                  {% for key,value in request.session.cart.items %}
+                  <tbody>
+                    <tr>
+                      <td class="cart_product"><a href="#"><img src="{{value.image}}" class="img-thumbnail img-responsive" style="max-width:50%;" alt="Product"></a></td>
+                      <td class="cart_description"><p class="product-name"><a href="#">{{value.name}} </a></p>
+                        <!-- <small><a href="#">Color : Beige</a></small><br> -->
+                        <!-- <small><a href="#">Size : S</a></small></td> -->
+                      <!-- <td class="cart_avail"><span class="label label-success">In stock</span></td> -->
+                      <td class="price"><span>{{ value.price }} </span></td>
+                      <td class="qty"><span>{{ value.quantity }} </span></td>
+                      <td class="price"><span>{{ value.price|multiply:value.quantity }} </span></td>
+                      <td class="action"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                    </tr>
+                    
+                  </tbody>
+                  {% endfor %}
+                  <tfoot>
+                    <tr>
+                      <td colspan="2" rowspan="2"></td>
+                      <td colspan="3">Delivery Fee Included</td>
+                      <!-- <td colspan="2">$160.88 </td> -->
+                    </tr>
+                    <tr>
+                      <td colspan="3"><strong>Total</strong></td>
+                      <td colspan="2"><strong> </strong></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              
+              <!-- <button class="button pull-right"><span>Place Order</span></button> -->
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- Main Container End --> 
+  <!-- service section -->
+  <div class="jtv-service-area">
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-3 col-sm-6 col-xs-12">
+          
+        </div>
+        <div class="col col-md-3 col-sm-6 col-xs-12 ">
+          
+        </div>
+        <div class="col col-md-3 col-sm-6 col-xs-12">
+          <div class="block-wrapper support">
+            <div class="text-des">
+              <div class="icon-wrapper"><i class="fa fa-umbrella"></i></div>
+              <div class="service-wrapper">
+                <h3>Support 24/7</h3>
+                <p>Call us: +234 906 667 2305</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-md-3 col-sm-6 col-xs-12">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-contact">
+      <div class="container">
+        <div class="row">
+          
+          <div class="col-sm-4">
+            <div class="footer-contact-item">
+              <div class="footer-contact-icon"> <i class="fa fa-phone"></i> </div>
+              <div class="footer-contact-text"> + 234 906 667 2305 </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-3 col-xs-12">
+          
+          <div class="social">
+            <ul class="inline-mode">
+              <li class="social-network fb"><a title="Connect us on Facebook" target="_blank" href="https://web.facebook.com/GOShop-106197331098319"><i class="fa fa-facebook"></i></a></li>
+              <!-- <li class="social-network googleplus"><a title="Connect us on Google+" target="_blank" href="https://twitter.com/GoShop47322089"><i class="fa fa-google-plus"></i></a></li> -->
+              <li class="social-network tw"><a title="Connect us on Twitter" target="_blank" href="https://twitter.com/GoShop47322089"><i class="icon-social-twitter icons"></i></a></li>
+              <li class="social-network linkedin"><a title="Connect us on Linkedin" target="_blank" href="https://www.pinterest.com/goshopperfect/pins/"><i class="fa fa-linkedin"></i></a></li>
+              <!-- <li class="social-network rss"><a title="Connect us on rss" target="_blank" href="https://instagram.com/"><i class="fa fa-rss"></i></a></li> -->
+              <li class="social-network instagram"><a title="Connect us on Instagram" target="_blank" href="https://instagram.com/"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-2 col-xs-12 collapsed-block">
+          <div class="footer-links">
+            <h3 class="links-title">Information<a class="expander visible-xs" href="#TabBlock-1">+</a></h3>
+            <div class="tabBlock" id="TabBlock-1">
+              <ul class="list-links list-unstyled">
+                <li><a >Delivery Information</a></li>
+                <li><a >Discount</a></li>
+                <li><a >Sitemap</a></li>
+                <li><a >Privacy Policy</a></li>
+                <li><a >FAQs</a></li>
+                <li><a >Terms &amp; Condition</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-md-2 col-xs-12 collapsed-block">
+          <div class="footer-links">
+            <h3 class="links-title">Insider<a class="expander visible-xs" href="#TabBlock-3">+</a></h3>
+            <div class="tabBlock" id="TabBlock-3">
+              <ul class="list-links list-unstyled">
+                <li><a > Sites Map </a></li>
+                <li><a >News</a></li>
+                <li><a >Trends</a></li>
+                <li><a >About Us</a></li>
+                <li><a >Contact Us</a></li>
+                <li><a >My Orders</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 col-md-2 col-xs-12 collapsed-block">
+          <div class="footer-links">
+            <h3 class="links-title">Service<a class="expander visible-xs" href="#TabBlock-4">+</a></h3>
+            <div class="tabBlock" id="TabBlock-4">
+              <ul class="list-links list-unstyled">
+                <li><a >Account</a></li>
+                <li><a >Wishlist</a></li>
+                <li><a >Shopping Cart</a></li>
+                <li><a >Return Policy</a></li>
+                <li><a >Special</a></li>
+                <li><a >Lookbook</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="footer-coppyright">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 col-xs-12 coppyright"> Copyright © 2021 <a href="#"> GoShop </a>. All Rights Reserved. </div>
+          <div class="col-sm-6 col-xs-12">
+            <!-- <ul class="footer-company-links">
+              <li> <a href="/">About GoShop</a> </li>
+              <li> <a href="#">Careers</a> </li>
+              <li> <a href="#">Privacy Policy</a> </li>
+            </ul> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <a  id="back-to-top" title="Back to top"><i class="fa fa-angle-up"></i></a> </div>
+
+<!-- End Footer --> 
+<!-- JS --> 
+
+<!-- jquery js --> 
+<script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script> 
+
+<!-- bootstrap js --> 
+<script type="text/javascript" src="{% static 'assets/js/bootstrap.min.js' %}"></script> 
+
+<!-- owl.carousel.min js --> 
+<script type="text/javascript" src="{% static 'assets/js/owl.carousel.min.js' %}"></script> 
+
+<!-- jtv-jtv-mobile-menu js --> 
+<script type="text/javascript" src="{% static 'assets/js/jtv-mobile-menu.js' %}"></script> 
+
+<!-- countdown js --> 
+<script type="text/javascript" src="{% static 'assets/js/countdown.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/jquery-ui.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/jquery.fancybox.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/jquery.flexslider.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/cloudzoom.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/cloud-zoom.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/venom-button.min.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/sumTable.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'assets/js/bootbox.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/js/zebra_dialog.min.js' %}"></script>
+
+<!-- main js --> 
+<script type="text/javascript" src="{% static 'assets/js/main.js' %}"></script>
+
+
+<!-- rev-slider js --> 
+<script type="text/javascript" src="{% static 'assets/js/rev-slider.js' %}"></script> 
+
+<script>
+    $('#myButton').venomButton({
+  
+    phone:'+2349066672305',
+  
+    chatMessage:'Chat Window Title',
+  
+    message:"Hi There",
+  
+    nameClient:"jQuery Script",
+  
+    showPopup:true
+  
+  });
+  
+  </script>
+
+<script>
+   $('#example1').bind('click',function(e) {
+    e.preventDefault();
+    $.Zebra_Dialog('GoShop Transfer Account:');
+});
+
+
+
+</script>
+
+<script>
+    $("#table").sumTable()
+</script>
+
+</body>
+</html>

@@ -13,6 +13,9 @@ import os
 import django_heroku
 import dotenv
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -36,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'djangocms_admin_style',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,7 +51,12 @@ INSTALLED_APPS = [
     'contact',
     'dashboard',
     'hitcount',
-    'social_widgets',
+    'sales',
+    'cart',
+    'cloudinary',
+    'django_email_verification',
+    # 'shop',
+    # 'social_widgets',
 ]
 
 MIDDLEWARE = [
@@ -73,10 +82,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processor.cart_total_amount',
             ],
         },
     },
 ]
+
+CART_SESSION_ID = 'cart'
 
 AUTH_USER_MODEL = 'accounts.CustomerReg'
 
@@ -127,14 +139,48 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+LOGIN_REDIRECT_URL = '/'
 
 STATIC_URL = '/assets/'
 STATICFILES_DIRS = (BASE_DIR, 'assets')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# def verified_callback(user):
+#     user.is_active = True
+
+
+# EMAIL_VERIFIED_CALLBACK = verified_callback
+# EMAIL_FROM_ADDRESS = 'orumwensey@gmail.com'
+# EMAIL_MAIL_SUBJECT = 'Confirm your email'
+# EMAIL_MAIL_HTML = 'dashboard/email_template.html'
+# EMAIL_MAIL_PLAIN = 'dashboard/email_template.txt'
+# EMAIL_TOKEN_LIFE = 60 * 60
+# EMAIL_PAGE_TEMPLATE = 'dashboard/email_confirmation.html'
+# EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = 'True'
+EMAIL_HOST_USER = 'orumwensey@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['password_key']
+EMAIL_USE_TLS = True
+
+cloudinary.config( 
+  cloud_name = "dxzrwvflo", 
+  api_key = "248583444414373", 
+  api_secret = "C1i08PVkjl0ht6vRxGXvq5GeUoc"
+  
+)
 
 import django
 django.setup()

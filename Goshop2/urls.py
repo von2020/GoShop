@@ -28,7 +28,19 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('blog/', include('blog.urls')),
     path('contact/', include('contact.urls')),
+    path('orders/', include('orders.urls')),
+    path('accounts/', include('accounts.urls')),
     path('', views.productList, name='home'),
+    path('<slug:slug>/', views.ProductDetail.as_view(), name='product_detail'),
+    path('product_category/<int:category>/', views.product_category, name='product_category'),
+
+    path('cart/add/<int:id>/', views.cart_add_two, name='cart_add_two'),
+    path('cart/item_clear/<int:id>/', views.item_clear_two, name='item_clear_two'),
+    path('cart/item_increment/<int:id>/', views.item_increment_two, name='item_increment_two'),
+    path('cart/item_decrement/<int:id>/', views.item_decrement_two, name='item_decrement_two'),
+    path('cart/cart_clear/', views.cart_clear_two, name='cart_clear_two'),
+    path('cart/cart-detail/',views.cart_detail_two, name='cart_detail_two'),
+    path('cart/checkout/', views.checkout, name='checkout'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

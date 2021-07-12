@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from  dashboard.models import ProductCategory
 from blog.views import postList
 from blog.models import Post, Like
-from contact.models import ContactUs
-from accounts.forms import ContactUsForm
+from contact.models import Message
+from accounts.forms import MessageForm
 
 
 # Create your views here.
@@ -12,7 +12,7 @@ def emailsent(request):
 
 def contact(request):
     cats = ProductCategory.objects.all()
-    form = ContactUsForm(request.POST or None)
+    form = MessageForm(request.POST or None)
     if form.is_valid():
         form.save()
         return redirect('/contact/contact-us')
